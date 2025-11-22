@@ -1,34 +1,102 @@
-# Travel-Agency-Management-System
+# Travel Agency Management System
 
+A comprehensive C++ console application for managing travel agency operations, including customer information, trip bookings, and invoice management.
 
-This project aims to create a C++ "Travel Agency Management System" program. Where I have to generate MENU options. This MENU option includes two classes named New Travel Trip and Show All User, two functions Edit User & Delete User under New Travel Trip, & three more functions Add Trip, Edit Trip & Delete Trip under the class of Show All User. But I have added a new MENU option called Exit Program to terminate the program.
+## Overview
 
-This Developed object-oriented program in C++ to create a Travel Agency Management System (TAMS) with the following information read from the keyboard:
-Now with choice enter the following information. 
+This Travel Agency Management System (TAMS) is an object-oriented program developed in C++ that provides a complete solution for managing travel bookings, customer data, and trip information through an interactive menu-driven interface.
 
-• New Travel Trip –
-Invoice ID (Auto-serial no) + Enter Date + Enter User Name + Enter User Address + Enter User Phone No. (11 digit) + Enter User Email Address + Enter Trip Date + Enter Trip Location (Start location and Final Destination)
+## Features
 
-• Show All Users, Delete User, Edit User –
-Enter Invoice ID + Enter Date + Enter User Name + Enter User Address + Enter User Phone No. (11 digit) + Enter User Email Address + Enter Trip Date + Enter Trip Location (Start location and Final Destination)
+The system provides the following functionalities:
 
-• Add Trip, Edit Trip, Delete Trip –
-Enter Invoice ID + Enter Trip Date + Enter Trip Location (Start location and Final Destination) 
+### Core Operations
 
-Please, Choose Your Option:
+1. **New Travel Trip** - Create a new travel booking with complete customer and trip details
+2. **Show All Users** - Display all registered customers and their booking information
+3. **Edit User** - Modify existing customer information
+4. **Delete User** - Remove customer records from the system
+5. **Add Trip** - Add new trip details to existing bookings
+6. **Edit Trip** - Update existing trip information
+7. **Delete Trip** - Remove trip records
+8. **Exit Program** - Terminate the application
 
-New Travel Trip.
-Show All Users.
-Edit User.
-Delete User.
-Add Trip.
-Edit Trip.
-Delete Trip. Enter Your Choice: _
-Exit Menu
+## Data Structure
 
-To solve this project named "Travel Agency Management System," I have created a MENU that includes eight options such as New Travel, Show All User, Edit User, Delete User, Add Trip, Edit Trip, Delete Trip, and Exit Program. In this program, I have created two classes named New Travel Trip and Show All User. I have declared three function named Add Trip(), Edit Trip() & Delete Trip() in the New Travel Trip Class section. I have declared two constructors in the New Travel
-Trip class: the "Default Constructor" and another is "Parameterized Constructor." 
+### Customer & Trip Information
 
-In the Show All User class, I have also declared three more functions, and these are Show User(), Delete User(), and Edit User(). In the main function, I have used a switch statement to show the option MENU. In this project, I have used four header files. The first one is <iostream>; this header file provides basic input and output services. The second one is <vector>; this header file is used for a contiguous storage location for their elements. The second last is <conio.h>; the CONIO stands for Console Input Output, which has functions like getch(). The getch() function holds the output screen for some time until the user passes a key from the keyboard to exit the console screen.
+Each travel booking captures the following information:
 
-And the last one is <cstdlib>; this header file declares a set of general-purpose functions such as exit() function. The exit() function works to terminate the program.
+- **Invoice ID** (Auto-generated serial number)
+- **Date** - Booking date
+- **User Name** - Customer's full name
+- **User Address** - Customer's residential address
+- **User Phone Number** - 11-digit contact number
+- **User Email Address** - Customer's email
+- **Trip Date** - Scheduled travel date
+- **Trip Location** - Start location and final destination
+
+### Operation-Specific Data Requirements
+
+#### New Travel Trip
+- All fields listed above are required
+
+#### Show All Users / Edit User / Delete User
+- All customer and trip fields for display and modification
+
+#### Add Trip / Edit Trip / Delete Trip
+- Invoice ID
+- Trip Date
+- Trip Location (start and destination)
+
+## Technical Architecture
+
+### Class Structure
+
+**NewTravelTrip Class**
+- Manages travel booking creation and trip operations
+- Contains methods: `AddTrip()`, `EditTrip()`, `DeleteTrip()`
+- Implements both default and parameterized constructors
+
+**ShowAllUser Class**
+- Handles user management operations
+- Contains methods: `ShowUser()`, `DeleteUser()`, `EditUser()`
+
+### Implementation Details
+
+- **Design Pattern**: Object-Oriented Programming (OOP)
+- **Control Flow**: Switch-case statement for menu navigation
+- **Programming Language**: C++
+
+### Header Files Used
+
+| Header File | Purpose |
+|------------|---------|
+| `<iostream>` | Standard input/output stream operations |
+| `<vector>` | Dynamic array container for storing records |
+| `<conio.h>` | Console input/output functions (e.g., `getch()` for screen control) |
+| `<cstdlib>` | General-purpose functions including `exit()` for program termination |
+
+## Usage
+
+The application presents an interactive menu where users can select operations by entering the corresponding option number. The program validates input and guides users through each operation with appropriate prompts.
+
+## Menu Interface
+
+```
+Please Choose Your Option:
+1. New Travel Trip
+2. Show All Users
+3. Edit User
+4. Delete User
+5. Add Trip
+6. Edit Trip
+7. Delete Trip
+8. Exit Menu
+
+Enter Your Choice: _
+```
+
+## License
+
+This project is available for educational and commercial use.
