@@ -1,434 +1,639 @@
-//Project: 19
-//Project: Travel Agency Management System
-//Name: Farhan Muhib Efty
-//ID: 190105022, Lab Group: A1, Year: 2, Semester: 1.
+/**
+ * ============================================================================
+ * PROJECT: Travel Agency Management System (TAMS)
+ * ============================================================================
+ *
+ * Project Number: 19
+ * Author: Farhan Muhib Efty
+ * Student ID: 190105022
+ * Lab Group: A1
+ * Academic Year: 2, Semester: 1
+ *
+ * Description:
+ * A comprehensive console-based application for managing travel agency
+ * operations including customer bookings, trip management, and invoice
+ * tracking using object-oriented programming principles.
+ *
+ * ============================================================================
+ */
 
-
-#include<iostream>
-#include<vector>
-#include<conio.h>
-#include<cstdlib>
+// Standard library includes
+#include <iostream> // For input/output operations
+#include <vector>   // For dynamic array containers
+#include <conio.h>  // For console I/O functions (getch)
+#include <cstdlib>  // For general utilities (exit)
 
 using namespace std;
 
-class NewTravelTrip              //Create a Class named NewTravelTrip
-{
-public:                         //Access specifier.
-    NewTravelTrip();            //Default Constructor. Constructor is a type of Function.
-    NewTravelTrip(int m)        //Parameterized Constructor.
-    {
-
-    }
-    void AddTrip();               //This Function is Add data to the previous recorded user.
-    string name;
-    string date;
-    string address;
-    string phoneno;
-    int invoice;
-    string email;
-    vector<string>tripdate;        //Format: vector<dataType>nameOfVector. Dynamic Array.
-    void EditTrip();               //This Function is Edit the Previous recorded Trip
-    void DeleteTrip();             //This Function is Delete the Previous recorded Trip
-    vector<string>startlocation;
-    vector<string>finaldestination;
-
-};
-
-class ShowAllUser                 //Create a Class named ShowAllUser.
+/**
+ * ============================================================================
+ * CLASS: NewTravelTrip
+ * ============================================================================
+ *
+ * Purpose: Manages travel trip creation and modification operations
+ *
+ * This class handles the creation of new travel bookings and provides
+ * functionality to add, edit, and delete trip information for existing
+ * customers. It maintains all customer and trip-related data.
+ * ============================================================================
+ */
+class NewTravelTrip
 {
 public:
-    void showUser();              //This Function is show the previous recorded user data.
-    int invoice;
-    string name;
-    string date;
-    string address;
-    string phoneno;
-    string email;
-    string tripdate;
-    string triplocation;
+    // Constructors
+    NewTravelTrip();        // Default constructor - creates new travel booking
+    NewTravelTrip(int m) {} // Parameterized constructor - for trip operations
 
-    void DeleteUser();          //This Function is delete the previous recorded user data.
-    void EditUser();            //This Function is Edit the previous recorded user data.
+    // Trip management methods
+    void AddTrip();    // Adds additional trip to existing booking
+    void EditTrip();   // Modifies existing trip information
+    void DeleteTrip(); // Removes trip from booking
 
+    // Customer information
+    int invoice;    // Auto-generated unique invoice ID
+    string name;    // Customer's full name
+    string date;    // Booking date
+    string address; // Customer's residential address
+    string phoneno; // Customer's contact number (11 digits)
+    string email;   // Customer's email address
 
+    // Trip information (supports multiple trips per booking)
+    vector<string> tripdate;         // Collection of trip dates
+    vector<string> startlocation;    // Collection of starting locations
+    vector<string> finaldestination; // Collection of final destinations
 };
 
-vector<NewTravelTrip>trips;      //Create a Global Vector.
-int inv;                        //Global Variable for auto invoice id.
+/**
+ * ============================================================================
+ * CLASS: ShowAllUser
+ * ============================================================================
+ *
+ * Purpose: Manages user display and modification operations
+ *
+ * This class provides functionality to view, edit, and delete customer
+ * records. It handles all operations related to customer data management.
+ * ============================================================================
+ */
+class ShowAllUser
+{
+public:
+    // User management methods
+    void showUser();   // Displays all customer records
+    void EditUser();   // Modifies existing customer information
+    void DeleteUser(); // Removes customer record from system
 
+    // Customer data fields (used for display/manipulation)
+    int invoice;         // Invoice identifier
+    string name;         // Customer name
+    string date;         // Booking date
+    string address;      // Customer address
+    string phoneno;      // Phone number
+    string email;        // Email address
+    string tripdate;     // Trip date
+    string triplocation; // Trip location
+};
+
+// ============================================================================
+// GLOBAL VARIABLES
+// ============================================================================
+vector<NewTravelTrip> trips; // Global vector storing all travel bookings
+int inv;                     // Global counter for auto-incrementing invoice IDs
+
+/**
+ * ============================================================================
+ * FUNCTION: main
+ * ============================================================================
+ *
+ * Purpose: Entry point of the application
+ *
+ * Provides an interactive menu-driven interface for users to perform various
+ * operations including creating bookings, managing customers, and handling
+ * trip information.
+ *
+ * Returns: 0 on successful program termination
+ * ============================================================================
+ */
 int main()
 {
-    int choice;
-    inv = 1;
-    while(1)
+    int choice; // Stores user's menu selection
+    inv = 1;    // Initialize invoice counter
+
+    // Main application loop - continues until user exits
+    // Main application loop - continues until user exits
+    while (1)
     {
+        // Display main menu
         cout << "==========================================================================" << endl;
-        cout << "\t\tPlease choose your option between (1 to 7):"<<endl;
+        cout << "\t\tPlease choose your option between (1 to 7):" << endl;
         cout << "==========================================================================" << endl;
         cout << endl;
-        cout << "\t1. New Travel Trip. "<<endl;
-        cout << "\t2. Show All Users. "<<endl;
-        cout << "\t3. Edit user. "<<endl;
-        cout << "\t4. Delete user. "<<endl;
-        cout << "\t5. Add Trip. "<<endl;
-        cout << "\t6. Edit Trip. "<<endl;
-        cout << "\t7. Delete Trip. "<<endl;
-        cout << "\t8. Exit Program. "<<endl;
+        cout << "\t1. New Travel Trip. " << endl;
+        cout << "\t2. Show All Users. " << endl;
+        cout << "\t3. Edit user. " << endl;
+        cout << "\t4. Delete user. " << endl;
+        cout << "\t5. Add Trip. " << endl;
+        cout << "\t6. Edit Trip. " << endl;
+        cout << "\t7. Delete Trip. " << endl;
+        cout << "\t8. Exit Program. " << endl;
         cout << endl;
         cout << "\tEnter Your Choice: ";
         cin >> choice;
-        switch(choice)
-        {
-        case 1:
-        {
-            cout << "========================================================================" << endl;
-            cout << "\t\tYou have chosen option 1."<<endl;
-            cout << "========================================================================" << endl;
-            NewTravelTrip ad;     //Create an object of NewTravelTrip.
 
+        // Process user selection
+        switch (choice)
+        {
+        case 1: // Create new travel booking
+        {
+            cout << "========================================================================" << endl;
+            cout << "\t\tYou have chosen option 1." << endl;
+            cout << "========================================================================" << endl;
+
+            // Create new booking - constructor handles data input
+            NewTravelTrip ad;
+
+            // Add booking to global trips vector
             trips.push_back(ad);
+
             cout << "======================================================================" << endl;
-            cout << "\t\tYour Data is Recorded. "<<endl;
-            cout << "\tPress any key to go Back to the main menu... "<<endl;
+            cout << "\t\tYour Data is Recorded. " << endl;
+            cout << "\tPress any key to go Back to the main menu... " << endl;
             cout << "======================================================================" << endl;
-            getch();            //The function hold the output screen for sometime.
+            getch(); // Hold screen until user presses a key
             break;
         }
-        case 2:
+        case 2: // Display all customer records
         {
             cout << "======================================================================" << endl;
-            cout << "\t\tYou have chosen option 2."<<endl;
+            cout << "\t\tYou have chosen option 2." << endl;
             cout << "\tYour Previously recorded Data is showing Below." << endl;
             cout << "======================================================================" << endl;
-            ShowAllUser show;    //Create an object of show.
-            show.showUser();     //Function Calling.
+
+            // Create ShowAllUser object and display all records
+            ShowAllUser show;
+            show.showUser();
+
             cout << "======================================================================" << endl;
-            cout << "\tPress any key to go to the main menu... "<<endl;
+            cout << "\tPress any key to go to the main menu... " << endl;
             cout << "======================================================================" << endl;
             getch();
             break;
         }
-        case 3:
+        case 3: // Edit existing customer information
         {
             cout << "======================================================================" << endl;
-            cout << "\t\tYou have chosen option 3."<<endl;
+            cout << "\t\tYou have chosen option 3." << endl;
             cout << "======================================================================" << endl;
+
+            // Edit customer record by invoice ID
             ShowAllUser edit;
             edit.EditUser();
+
             cout << "======================================================================" << endl;
-            cout << "\t\tYour Data is Edited. "<<endl;
-            cout << "\tPress any key to go Back to the main menu... "<<endl;
+            cout << "\t\tYour Data is Edited. " << endl;
+            cout << "\tPress any key to go Back to the main menu... " << endl;
             cout << "======================================================================" << endl;
             getch();
             break;
         }
-        case 4:
+        case 4: // Delete customer record
         {
             cout << "======================================================================" << endl;
-            cout << "\t\tYou have chosen option 4."<<endl;
+            cout << "\t\tYou have chosen option 4." << endl;
             cout << "======================================================================" << endl;
+
+            // Remove customer record from system
             ShowAllUser del;
             del.DeleteUser();
+
             cout << "======================================================================" << endl;
-            cout << "\t\tYour Data is Deleted. "<<endl;
-            cout << "\tPress any key to go Back to the main menu... "<<endl;
+            cout << "\t\tYour Data is Deleted. " << endl;
+            cout << "\tPress any key to go Back to the main menu... " << endl;
             cout << "======================================================================" << endl;
             getch();
             break;
         }
-        case 5:
+        case 5: // Add additional trip to existing booking
         {
             cout << "======================================================================" << endl;
-            cout << "\t\tYou have chosen option 5."<<endl;
+            cout << "\t\tYou have chosen option 5." << endl;
             cout << "======================================================================" << endl;
+
+            // Add new trip to existing customer record
             NewTravelTrip tp(0);
             tp.AddTrip();
+
             cout << "======================================================================" << endl;
-            cout << "\t\tYour Trip is Added. "<<endl;
-            cout << "\tPress any key to go Back to the main menu... "<<endl;
+            cout << "\t\tYour Trip is Added. " << endl;
+            cout << "\tPress any key to go Back to the main menu... " << endl;
             cout << "======================================================================" << endl;
             getch();
             break;
         }
-        case 6:
+        case 6: // Edit existing trip information
         {
             cout << "======================================================================" << endl;
-            cout << "\t\tYou have chosen option 6."<<endl;
+            cout << "\t\tYou have chosen option 6." << endl;
             cout << "======================================================================" << endl;
+
+            // Modify trip details for a specific booking
             NewTravelTrip tp(0);
             tp.EditTrip();
+
             cout << "======================================================================" << endl;
-            cout << "\t\tYour Trip is Edited. "<<endl;
-            cout << "\tPress any key to go Back to the main menu... "<<endl;
+            cout << "\t\tYour Trip is Edited. " << endl;
+            cout << "\tPress any key to go Back to the main menu... " << endl;
             cout << "======================================================================" << endl;
             getch();
             break;
         }
-        case 7:
+        case 7: // Delete trip from booking
         {
             cout << "======================================================================" << endl;
             cout << "\t\tYou have chosen option 7." << endl;
             cout << "======================================================================" << endl;
+
+            // Remove specific trip from customer record
             NewTravelTrip tp(0);
             tp.DeleteTrip();
-            cout << "======================================================================" << endl;
-            cout << "\t\tYour Trip is Deleted. "<<endl;
-            cout << "\tPress any key to go Back to the main menu... "<<endl;
-            cout << "======================================================================" << endl;
-            getch();
-            break;
-        }
-        case 8:
-        {
-            cout << "======================================================================" << endl;
-            cout << "\t\tPress Any key. "<<endl;
-            cout << "\tIf you Want to Exit the Program..."<<endl;
-            cout << "======================================================================" << endl;
-            exit(0);
-            break;
-        }
-        default:
-        {
-            cout << "============================================================================" << endl;
-            cout <<"\tSorry!Incorrect Option. Press any key to go to the main menu... " << endl;
-            cout << "============================================================================" << endl;
-            getch();
-            break;
-        }
-        }
 
+            cout << "======================================================================" << endl;
+            cout << "\t\tYour Trip is Deleted. " << endl;
+            cout << "\tPress any key to go Back to the main menu... " << endl;
+            cout << "======================================================================" << endl;
+            getch();
+            break;
+        }
+        case 8: // Exit application
+        {
+            cout << "======================================================================" << endl;
+            cout << "\t\tPress Any key. " << endl;
+            cout << "\tIf you Want to Exit the Program..." << endl;
+            cout << "======================================================================" << endl;
+            exit(0); // Terminate program with success status
+            break;
+        }
+        default: // Handle invalid menu selection
+        {
+            cout << "============================================================================" << endl;
+            cout << "\tSorry!Incorrect Option. Press any key to go to the main menu... " << endl;
+            cout << "============================================================================" << endl;
+            getch();
+            break;
+        }
+        }
     }
 
-
-
-    return 0;
+    return 0; // Program termination
 }
 
-
-
-NewTravelTrip::NewTravelTrip()          // Default constructor called automatically.
+/**
+ * ============================================================================
+ * CONSTRUCTOR: NewTravelTrip::NewTravelTrip (Default)
+ * ============================================================================
+ *
+ * Purpose: Creates a new travel booking and collects customer information
+ *
+ * This constructor is automatically called when creating a new booking.
+ * It prompts the user for all required information including customer details
+ * and initial trip information. The invoice ID is auto-generated.
+ * ============================================================================
+ */
+NewTravelTrip::NewTravelTrip()
 {
-    string t_date, s_loc, f_des;
+    string t_date, s_loc, f_des; // Temporary variables for trip data
+
+    // Auto-generate invoice ID and increment global counter
     invoice = inv;
-    cout << "\n              Invoice ID: " << invoice ;   //Auto Generated Invoice ID.
-    getline(cin,date);                                   //getline string for get the full line.
-    cout << "\n              Enter Date: " ;
-    getline(cin,date);
-    cout << "\n         Enter User Name: " ;
+    cout << "\n              Invoice ID: " << invoice;
+
+    // Clear input buffer before accepting data
+    getline(cin, date);
+
+    // Collect customer information
+    cout << "\n              Enter Date: ";
+    getline(cin, date);
+    cout << "\n         Enter User Name: ";
     getline(cin, name);
-    cout << "\n      Enter User Address: " ;
+    cout << "\n      Enter User Address: ";
     getline(cin, address);
-    cout << "\n    Enter User Phone No.: " ;
+    cout << "\n    Enter User Phone No.: ";
     cin >> phoneno;
-    cout << "\nEnter User Email Address: " ;
+    cout << "\nEnter User Email Address: ";
     cin >> email;
-    cout << "\n         Enter Trip Date: " ;
+
+    // Collect trip information
+    cout << "\n         Enter Trip Date: ";
     cin >> t_date;
-    cout << "\n     Enter Trip Location \n" ;
+    cout << "\n     Enter Trip Location \n";
     cout << "\n     ------------------- " << endl;
+    getline(cin, s_loc); // Clear buffer
+    cout << "\n           Start Location: ";
     getline(cin, s_loc);
-    cout <<"\n           Start Location: ";
-    getline(cin, s_loc);
-    cout <<"\n        Final Destination: ";
+    cout << "\n        Final Destination: ";
     getline(cin, f_des);
 
-    //Adds a new element at the end of the vector.
+    // Store trip details in vectors (supports multiple trips per booking)
     tripdate.push_back(t_date);
     startlocation.push_back(s_loc);
     finaldestination.push_back(f_des);
-    inv++;             //++Invoice ID.
+
+    inv++; // Increment global invoice counter for next booking
 }
 
-
+/**
+ * ============================================================================
+ * METHOD: ShowAllUser::showUser
+ * ============================================================================
+ *
+ * Purpose: Displays all customer records with their trip information
+ *
+ * Iterates through the global trips vector and displays complete information
+ * for each customer including all associated trips.
+ * ============================================================================
+ */
 void ShowAllUser::showUser()
 {
     int sz, i, j;
-    sz = trips.size();      //Vector.size()Returns the number of elements in the vector.
-    for(i = 0; i < sz; i++)
-    {
 
-        cout << "\n            Invoice ID: " << trips[i].invoice << endl ;
+    // Get total number of bookings
+    sz = trips.size();
+
+    // Iterate through all customer records
+    for (i = 0; i < sz; i++)
+    {
+        // Display customer information
+        cout << "\n            Invoice ID: " << trips[i].invoice << endl;
         cout << "\n                  Date: " << trips[i].date << endl;
         cout << "\n             User Name: " << trips[i].name << endl;
         cout << "\n          User Address: " << trips[i].address << endl;
         cout << "\n         User Phone No: " << trips[i].phoneno << endl;
         cout << "\n    User Email Address: " << trips[i].email << endl;
 
-        //j defines how many trips have an invoice id
-        for(j = 0; j < trips[i].tripdate.size(); j++)
+        // Display all trips associated with this customer
+        // j represents the number of trips for current invoice
+        for (j = 0; j < trips[i].tripdate.size(); j++)
         {
-            cout << "\n             Trip Date: " << trips[i].tripdate[j]<<endl;
+            cout << "\n             Trip Date: " << trips[i].tripdate[j] << endl;
             cout << "\n         Trip Location: " << endl;
             cout << "\n         -------------- " << endl;
             cout << "\n        Start Location: " << trips[i].startlocation[j] << endl;
-            cout << "\n     Final Destination: " << trips[i].finaldestination[j] << endl << endl;
+            cout << "\n     Final Destination: " << trips[i].finaldestination[j] << endl
+                 << endl;
         }
-        cout << endl << endl;
+        cout << endl
+             << endl;
     }
 }
 
-
-
-void ShowAllUser::EditUser()          //The Edit User Function.
+/**
+ * ============================================================================
+ * METHOD: ShowAllUser::EditUser
+ * ============================================================================
+ *
+ * Purpose: Modifies existing customer and trip information
+ *
+ * Allows user to update all information for a specific customer identified
+ * by invoice ID. This replaces all existing data including trip information.
+ * ============================================================================
+ */
+void ShowAllUser::EditUser()
 {
     int invc_id, i, j;
     string t_date, s_loc, f_des;
-    cout<< "\n             Enter Invoice ID: ";
-    cin>>invc_id;
 
-    //To Find the User input Invoice ID.
-    for(i = 0; i < trips.size(); i++)
+    // Prompt for invoice ID to edit
+    cout << "\n             Enter Invoice ID: ";
+    cin >> invc_id;
+
+    // Search for matching invoice ID in trips vector
+    for (i = 0; i < trips.size(); i++)
     {
-        if(trips[i].invoice == invc_id)
-            j = i;
+        if (trips[i].invoice == invc_id)
+            j = i; // Store index of matching record
     }
+
+    // Clear input buffer
     getline(cin, trips[j].date);
-    cout << "\n               Enter New Date: " ;
+
+    // Collect updated customer information
+    cout << "\n               Enter New Date: ";
     getline(cin, trips[j].date);
-    cout << "\n          Enter New User Name: " ;
+    cout << "\n          Enter New User Name: ";
     getline(cin, trips[j].name);
-    cout << "\n       Enter New User Address: " ;
+    cout << "\n       Enter New User Address: ";
     getline(cin, trips[j].address);
-    cout << "\n      Enter New User Phone No: " ;
+    cout << "\n      Enter New User Phone No: ";
     cin >> trips[j].phoneno;
-    cout << "\n Enter User New Email Address: " ;
+    cout << "\n Enter User New Email Address: ";
     cin >> trips[j].email;
 
-    trips[j].tripdate.clear();     //It is used to remove all the elements of the vector container
+    // Clear all existing trip data for this customer
+    trips[j].tripdate.clear();
     trips[j].finaldestination.clear();
     trips[j].startlocation.clear();
 
+    // Clear input buffer
     getline(cin, t_date);
-    cout << "\n         Enter New Trip Date: " ;
+
+    // Collect new trip information
+    cout << "\n         Enter New Trip Date: ";
     getline(cin, t_date);
-    cout << "\n     Enter New Trip Location: \n" ;
+    cout << "\n     Enter New Trip Location: \n";
     cout << "\n     ------------------------ " << endl;
-    cout <<"\n           New Start Location: ";
+    cout << "\n           New Start Location: ";
     getline(cin, s_loc);
-    cout <<"\n        New Final Destination: ";
+    cout << "\n        New Final Destination: ";
     getline(cin, f_des);
 
-    //Adds a new element at the end of the vector.
+    // Add new trip data to vectors
     trips[j].tripdate.push_back(t_date);
     trips[j].startlocation.push_back(s_loc);
     trips[j].finaldestination.push_back(f_des);
 }
 
-
-
-
-void ShowAllUser::DeleteUser()        //The Delete User Function.
+/**
+ * ============================================================================
+ * METHOD: ShowAllUser::DeleteUser
+ * ============================================================================
+ *
+ * Purpose: Removes a customer record from the system
+ *
+ * Deletes the entire customer record including all associated trip information
+ * based on the invoice ID provided by the user.
+ * ============================================================================
+ */
+void ShowAllUser::DeleteUser()
 {
     int invc_id, i, j;
     string t_date, s_loc, f_des;
+
+    // Prompt for invoice ID to delete
     cout << "\n            Enter Invoice ID: ";
     cin >> invc_id;
 
-    //To Find the User input Invoice ID.
-    for(i = 0; i < trips.size(); i++)
+    // Search for matching invoice ID
+    for (i = 0; i < trips.size(); i++)
     {
-        if(trips[i].invoice == invc_id)
-            j = i;
+        if (trips[i].invoice == invc_id)
+            j = i; // Store index of record to delete
     }
-    vector<NewTravelTrip>::iterator it;    //iterator is use like pointer.
-    it = trips.begin();              //Reads Vector from the first element
-    for(i = 0; i < j; i++)
+
+    // Use iterator to navigate to the record position
+    vector<NewTravelTrip>::iterator it;
+    it = trips.begin(); // Point to first element
+
+    // Advance iterator to target position
+    for (i = 0; i < j; i++)
         it++;
-    trips.erase(it);                 // It is used to remove elements from a container
-                                     //from the specified position or range.
+
+    // Remove the customer record from vector
+    trips.erase(it);
 }
 
-
-
-void NewTravelTrip::AddTrip()        //This Function Add data to the Previous record.
+/**
+ * ============================================================================
+ * METHOD: NewTravelTrip::AddTrip
+ * ============================================================================
+ *
+ * Purpose: Adds an additional trip to an existing customer booking
+ *
+ * Allows adding multiple trips to a single customer record, enabling
+ * management of customers with multiple travel bookings.
+ * ============================================================================
+ */
+void NewTravelTrip::AddTrip()
 {
     int invc_id, i, j;
+
+    // Prompt for invoice ID to add trip to
     cout << "\n        Enter Invoice ID: ";
     cin >> invc_id;
 
-    //To Find the User input Invoice ID.
-    for(i = 0; i < trips.size(); i++)
+    // Locate the customer record by invoice ID
+    for (i = 0; i < trips.size(); i++)
     {
-        if(trips[i].invoice == invc_id)
-            j = i;
+        if (trips[i].invoice == invc_id)
+            j = i; // Store index of matching customer
     }
+
     string t_date, s_loc, f_des;
-    cout << "\n         Enter Trip Date: " ;
+
+    // Collect new trip information
+    cout << "\n         Enter Trip Date: ";
     cin >> t_date;
-    cout << "\n     Enter Trip Location: \n" ;
+    cout << "\n     Enter Trip Location: \n";
     cout << "\n     -------------------- " << endl;
+    getline(cin, s_loc); // Clear buffer
+    cout << "\n           Start Location: ";
     getline(cin, s_loc);
-    cout <<"\n           Start Location: ";
-    getline(cin, s_loc);
-    cout <<"\n        Final Destination: ";
+    cout << "\n        Final Destination: ";
     getline(cin, f_des);
 
-    //Adds a new element at the end of the vector.
+    // Append new trip to customer's trip vectors
     trips[j].tripdate.push_back(t_date);
     trips[j].startlocation.push_back(s_loc);
     trips[j].finaldestination.push_back(f_des);
 }
 
-void NewTravelTrip::EditTrip()    //This Function is Edit the Previous recorded Trip
+/**
+ * ============================================================================
+ * METHOD: NewTravelTrip::EditTrip
+ * ============================================================================
+ *
+ * Purpose: Modifies trip information for a specific booking
+ *
+ * Displays all trips for the selected customer and allows the user to choose
+ * which trip to edit. Supports customers with multiple trips.
+ * ============================================================================
+ */
+void NewTravelTrip::EditTrip()
 {
     int invc_id, i, j, x;
+
+    // Prompt for invoice ID
     cout << "\n           Enter Invoice ID: ";
     cin >> invc_id;
 
-    //To Find the User input Invoice ID.
-    for(i = 0; i < trips.size(); i++)     //size() Returns the number of elements in the vector.
+    // Find customer record by invoice ID
+    for (i = 0; i < trips.size(); i++)
     {
-        if(trips[i].invoice == invc_id)
-            j = i;
+        if (trips[i].invoice == invc_id)
+            j = i; // Store customer index
     }
-    for(x = 0; x < trips[j].tripdate.size(); x++)   //x defines num. of trip.
+
+    // Iterate through all trips for this customer
+    for (x = 0; x < trips[j].tripdate.size(); x++)
     {
+        // Display current trip details and ask for confirmation
         cout << "======================================================================" << endl;
-        cout << "Do you want to edit this Trip? Enter 'Y/y' for yes, 'N/n' for no."<<endl;
+        cout << "Do you want to edit this Trip? Enter 'Y/y' for yes, 'N/n' for no." << endl;
         cout << "======================================================================" << endl;
-        cout << "\n              Trip Date: " << trips[j].tripdate[x]<<endl;
+        cout << "\n              Trip Date: " << trips[j].tripdate[x] << endl;
         cout << "\n          Trip Location: " << endl;
         cout << "\n          -------------- " << endl;
-        cout << "\n         Start Location: "<< trips[j].startlocation[x]<<endl;
-        cout << "\n      Final Destination: "<< trips[j].finaldestination[x]<<endl<<endl;
+        cout << "\n         Start Location: " << trips[j].startlocation[x] << endl;
+        cout << "\n      Final Destination: " << trips[j].finaldestination[x] << endl
+             << endl;
+
+        // Get user confirmation
         string inp;
         cin >> inp;
-        if(inp == "Y" || inp == "y")
+
+        // If user confirms, edit this trip
+        if (inp == "Y" || inp == "y")
         {
             string t_date, s_loc, f_des;
-            cout << "\n         Enter Trip Date: " ;
+
+            // Collect updated trip information
+            cout << "\n         Enter Trip Date: ";
             cin >> t_date;
-            cout << "\n     Enter Trip Location: \n" ;
+            cout << "\n     Enter Trip Location: \n";
             cout << "\n     -------------------- " << endl;
+            getline(cin, s_loc); // Clear buffer
+            cout << "\n           Start Location: ";
             getline(cin, s_loc);
-            cout <<"\n           Start Location: ";
-            getline(cin, s_loc);
-            cout <<"\n        Final Destination: ";
+            cout << "\n        Final Destination: ";
             getline(cin, f_des);
 
+            // Update trip data at specific index
             trips[j].tripdate[x] = t_date;
             trips[j].startlocation[x] = s_loc;
             trips[j].finaldestination[x] = f_des;
-            break;
+            break; // Exit loop after editing
         }
     }
 }
 
-void NewTravelTrip::DeleteTrip()     //This Function is Delete the Previous recorded Trip
+/**
+ * ============================================================================
+ * METHOD: NewTravelTrip::DeleteTrip
+ * ============================================================================
+ *
+ * Purpose: Removes a specific trip from a customer's booking
+ *
+ * Displays all trips for the selected customer and allows the user to choose
+ * which trip to delete. Uses iterators for safe removal from vectors.
+ * ============================================================================
+ */
+void NewTravelTrip::DeleteTrip()
 {
     int invc_id, i, j, x, y;
+
+    // Prompt for invoice ID
     cout << "\n       Enter Invoice ID: ";
     cin >> invc_id;
 
-    //To Find the User input Invoice ID.
-    for(i = 0; i < trips.size(); i++)
+    // Locate customer record
+    for (i = 0; i < trips.size(); i++)
     {
-        if(trips[i].invoice == invc_id)
-            j = i;
+        if (trips[i].invoice == invc_id)
+            j = i; // Store customer index
     }
 
-    for(x = 0; x < trips[j].tripdate.size(); x++)
+    // Iterate through all trips for this customer
+    for (x = 0; x < trips[j].tripdate.size(); x++)
     {
+        // Display current trip and ask for deletion confirmation
         cout << "======================================================================" << endl;
         cout << "\nDo you want to delete this Trip? Enter 'Y/y' for yes, 'N/n' for no." << endl;
         cout << "======================================================================" << endl;
@@ -436,32 +641,38 @@ void NewTravelTrip::DeleteTrip()     //This Function is Delete the Previous reco
         cout << "\t    Trip Location: " << endl;
         cout << "\t    -------------- " << endl;
         cout << "\t   Start Location: " << trips[j].startlocation[x] << endl;
-        cout << "\tFinal Destination: " << trips[j].finaldestination[x] << endl << endl;
+        cout << "\tFinal Destination: " << trips[j].finaldestination[x] << endl
+             << endl;
+
+        // Get user confirmation
         string inp;
         cin >> inp;
-        if(inp == "Y" || inp == "y")
-        {
-            vector<string>::iterator it;   //Iterators are used to point at the memory addresses
 
-            it = trips[j].tripdate.begin();       //Reads Vector from the first element
-            for(y = 0; y < x; y++)
-                it++;
-            trips[j].tripdate.erase(it);       // It is used to remove elements from a container
-                                               //from the specified position or range.
+        // If confirmed, delete the trip
+        if (inp == "Y" || inp == "y")
+        {
+            // Use iterator for safe deletion from vectors
+            vector<string>::iterator it;
+
+            // Delete trip date at index x
+            it = trips[j].tripdate.begin();
+            for (y = 0; y < x; y++)
+                it++; // Advance iterator to target position
+            trips[j].tripdate.erase(it);
+
+            // Delete start location at index x
             it = trips[j].startlocation.begin();
-            for(y = 0; y < x; y++)
+            for (y = 0; y < x; y++)
                 it++;
             trips[j].startlocation.erase(it);
 
+            // Delete final destination at index x
             it = trips[j].finaldestination.begin();
-            for(y = 0; y < x; y++)
+            for (y = 0; y < x; y++)
                 it++;
             trips[j].finaldestination.erase(it);
 
-            break;
+            break; // Exit loop after deletion
         }
     }
 }
-
-
-
